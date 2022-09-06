@@ -12,11 +12,16 @@ app.use(express.json());
  */
 // Your code here
 
+app.get('/version', (req, res) => {
+    res.send('1.0.0')
+})
+
 /**
  *  Basic Phase 2 - Route param and JSON response
  *      Method: GET
  *      Route: /viewers
  *      Route Parameter: id
+ *      Path: /viewers/:id
  *      Response: JSON containing user object with id, first name, last name,
  *                birthdate and list of favorite movies
  *
@@ -25,9 +30,25 @@ app.use(express.json());
  */
 // Your code here
 
+app.get('/viewers/:banana', (req, res) => {
+    console.log(req.path)
+    console.log(req.params.banana)
+    res.json({
+        id: req.params.banana,
+        firstName: 'Alec',
+        lastName: 'Keeler',
+        birthday: new Date('09-15-1989'),
+        faveMovies: [
+            'The Prestige',
+            "A Knight's Tale"
+        ]
+    })
+})
+
 /** Basic Phase 3 - Query params in URL
  *      Method: GET
  *      Route: /info
+ *      ?message=x&anothermessage=y
  *      Request: message
  *      Response: message (reflected back to the user)
  *      Error Handling: If "message" is missing from the query string,
@@ -43,6 +64,15 @@ app.use(express.json());
  *          message required
  */
 // Your code here
+
+app.get('/info', (req, res) => {
+    console.log(req.query)
+    if (req.query.message) {
+        res.json({yourMessage: req.query.message})
+    } else {
+        res.send('Message Required')
+    }
+})
 
 /**
  *  IMPORTANT: Scroll to the top for basic phases.

@@ -1,0 +1,15 @@
+Route Handlers/Endpoints require:
+Match the method
+    get, post, put, patch, delete, all
+Match the path
+    string, (regular expression), or array of strings/regular expressions
+Send a response
+    send, json, (redirect, render)
+
+Accessing data from the client
+    app.use(express.json()) - required for reading JSON request bodies
+    req.body - access JSON request bodies
+    req.params - access route parameters from the request path
+        A param can be anything, so make sure your API structure doesn't allow 
+        routes with params to catch unintended requests
+    req.query - access query parameters from the request path
