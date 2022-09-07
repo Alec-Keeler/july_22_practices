@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-// First
+// First 
 app.use('/', (req, res, next) => {
   console.log('First');
   const error = new Error('First');
@@ -27,6 +27,7 @@ const fourth = (req, res, next) => {
   console.log('Fourth');
   const error = new Error('Fourth');
   throw error;
+  // next(err)
 };
 
 // Fifth
