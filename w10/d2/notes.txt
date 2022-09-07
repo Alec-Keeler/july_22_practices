@@ -1,0 +1,28 @@
+Global middleware: app.use((req, res, next) => {
+    // stuff
+    next()
+})
+
+Route-specific middleware: const doThing = (req, res, next) => {
+    // thing
+    next()
+}
+app.get('/', doThing, (req, res) => {})
+
+Error-handling middleware: app.use((err, req, res, next) => {
+    // handle error
+})
+
+Router-wide middleware: router.use((req, res, next) => {
+    // route specific stuff
+    next()
+})
+
+Router files are an important part of constructing an Express pipeline and
+keeping our code organized.
+    app.use('/path-prefix', importedRouterFile)
+        // the path for vv this vv route handler would be /path-prefix/find-stuff
+        router.get('/find-stuff', (req, res) => {})
+
+Environment variables allow us to store data that may change depending on our environment,
+and protect sensitive information.  Always gitignore your .env!
