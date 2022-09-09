@@ -1,10 +1,14 @@
 // Instantiate Express and the application - DO NOT MODIFY
 const express = require('express');
 const app = express();
+require('dotenv').config()
 
 // Database file - DO NOT MODIFY
 // DO NOT DO THIS - USE .env VARIABLE INSTEAD
-const DATA_SOURCE = 'app.db';
+// const DATA_SOURCE = 'app.db';
+const DATA_SOURCE = process.env.DATA_SOURCE;
+const sqlite3 = require('sqlite3');
+const db = new sqlite3.Database(DATA_SOURCE, sqlite3.OPEN_READWRITE)
 
 /**
  * Step 1 - Connect to the database
@@ -30,24 +34,31 @@ app.get('/colors/:id', (req, res, next) => {
      * STEP 2A - SQL Statement
      */
     // Your code here
-
+    const sql = 'SELECT * FROM colors WHERE id = ?'
     /**
      * STEP 2B - SQL Parameters
      */
     // Your code here
-
+    const params = [req.params.id]
     /**
      * STEP 2C - Call database function
      *  - return response
      */
     // Your code here
+    db.get(sql, params, (err, row) => {
+        if (err) {
+            next(err)
+        } else {
+            res.json(row)
+        }
+    })
 });
 
 // Add color
-app.get('/colors/add/:name', (req, res, next) => {
+app.post('/colors/:name', (req, res, next) => {
     // SQL INSERT
     const sql = "INSERT INTO colors (name) VALUES (?)";
-    const params = [req.params.name];
+    const params = [req.body.name];
 
     // SQL QUERY NEW ROW
     const sqlLast = 'SELECT * FROM colors ORDER BY id DESC LIMIT 1';
@@ -60,6 +71,20 @@ app.get('/colors/add/:name', (req, res, next) => {
      *  - return new row
      */
     // Your code here
+
+    db.run(sql, params, err => {
+        if (err) {
+            next(err)
+        } else {
+            db.get(sqlLast, [], (error, row) => {
+                if (error) {
+                    next(error)
+                } else {
+                    res.json(row)
+                }
+            })
+        }
+    })
 })
 
 // Root route - DO NOT MODIFY

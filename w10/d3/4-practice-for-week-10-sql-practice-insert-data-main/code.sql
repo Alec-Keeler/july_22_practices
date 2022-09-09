@@ -8,11 +8,15 @@ CREATE TABLE friends (
 
 INSERT INTO friends (first_name, last_name)
 VALUES
-  ('Ryan', 'Pond'),
-  ('Sky', 'Tyler'),
-  ('Morgan', 'Jones'),
-  ('Shannon', 'Noble'),
-  ('River', 'Song'),
-  ('Ryan', 'Noble');
+('Amy', 'Pond');
 
-SELECT * FROM friends;
+
+INSERT INTO friends (first_name, last_name)
+VALUES
+('Rose', 'Tyler'),
+('Martha', 'Jones'),
+('Donna', 'Noble'),
+('River', 'Song');
+
+INSERT INTO friends (id, first_name, last_name)
+VALUES (?, 'Jenny', 'Who');

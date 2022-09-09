@@ -1,5 +1,5 @@
 {
-  "name": "combining-express-sql-short-practice",
+  "name": "combining-express-sql-long-practice",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.0.2",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "sqlite3": "^5.0.2"
   },
