@@ -1,0 +1,19 @@
+I am creating a board game app to store the board games I own, and need to design a database.
+
+Following is the information I want to find a way to store
+Boardgames - (name, number of players, category, average rating)
+'Gloomhaven', 4, 'Adventure', 8.8
+'Pandemic Legacy: Season 1', 4, 'Cooperative', 8.62
+'Brass: Birmingham', 4, 'Economic', 8.66
+'Terraforming Mars', 5, 'Economic', 8.43
+'Twilight Imperium: Fourth Edition', 6, 'Strategy', 8.7
+
+Users - (name, email, password, favorite category)
+'Alec', 'alec@thegoogs.com', 'hunter2', 'Strategy'
+'Ryan', 'ryan@thegoogs.com', 'password123', 'Adventure'
+'Geoffrey', 'geoff@thegoogs.com', 'geoffbechillin1', 'Cooperative'
+
+Reviews - (content, user_id, game_id)
+'This game was way too long!', 1, 5
+'Too soon', 3, 2
+'N/A', 2, 1
