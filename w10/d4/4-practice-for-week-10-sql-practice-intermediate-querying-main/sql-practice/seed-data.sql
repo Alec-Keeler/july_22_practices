@@ -19,5 +19,6 @@ VALUES ('The Falling Box', 1, 2015, 25000),
   ('Where We Go', 4, 2020, 63000),
   ('The King River', 5, 2017, 85000),
   ('Under Water', 5, 2020, 106000),
+  ("Wasn't", 5, 2020, 106000),
   ('Another Fork', 5, 2021, 140000);
   

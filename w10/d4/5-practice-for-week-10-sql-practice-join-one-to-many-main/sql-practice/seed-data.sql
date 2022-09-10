@@ -8,7 +8,7 @@ CREATE TABLE bands (
 );
 CREATE TABLE albums (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  title VARCHAR(100) NOT NULL,
+  name VARCHAR(100) NOT NULL,
   band_id INTEGER,
   year INTEGER NOT NULL,
   num_sold INTEGER NOT NULL DEFAULT 0,
@@ -22,7 +22,7 @@ VALUES (1, 'The Falling Box'),
   (4, 'Playin Sound'),
   (5, 'The King River');
 
-INSERT INTO albums (title, band_id, year, num_sold)
+INSERT INTO albums (name, band_id, year, num_sold)
 VALUES ('The Falling Box', 1, 2015, 25000),
   ('Again', 1, 2018, 30000),
   ('The End', 1, 2020, 120000),

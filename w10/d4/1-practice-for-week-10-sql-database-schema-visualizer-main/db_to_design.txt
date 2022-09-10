@@ -4,8 +4,8 @@ Following is the information I want to find a way to store
 Boardgames - (name, number of players, category, average rating)
 'Gloomhaven', 4, 'Adventure', 8.8
 'Pandemic Legacy: Season 1', 4, 'Cooperative', 8.62
-'Brass: Birmingham', 4, 'Economic', 8.66
-'Terraforming Mars', 5, 'Economic', 8.43
+'Brass: Birmingham', 4, 1, 8.66
+'Terraforming Mars', 5, 1, 8.43
 'Twilight Imperium: Fourth Edition', 6, 'Strategy', 8.7
 
 Users - (name, email, password, favorite category)
