@@ -11,6 +11,8 @@ CREATE TABLE posts (
     content TEXT NOT NULL
 );
 
+-- Convention: index_name: idx_[table name]_[column names]
+
 -- 10 users sign up for our website every day, and we get about 5 update/delete requests per day.
 -- Our website only allows admins to search for users, which only happens a few times a day, but looks up users by email and username.
 
@@ -19,9 +21,11 @@ CREATE TABLE posts (
 
 
 -- Create an index on posts
--- Good or bad?
+-- Good or bad? GOOD
 -- Code:
+CREATE INDEX idx_posts_title ON posts(title)
 
 -- Create an index on users
--- Good or bad?
+-- Good or bad? BAD
 -- Code:
+CREATE INDEX idx_users_email_username ON users(email, username);

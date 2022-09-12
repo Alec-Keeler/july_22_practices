@@ -7,7 +7,14 @@
 
 -- Paste your results below (as a comment):
 
+SELECT * FROM cats
+JOIN cat_toys ON (cat_toys.cat_id = cats.id)
+JOIN toys ON (cat_toys.toy_id = toys.id)
+WHERE toys.id = 5;
 
+-- SELECT * FROM cat_toys
+-- JOIN cats ON (cat_toys.cat_id = cats.id)
+-- WHERE toy_id = 5;
 
 
 ----------
@@ -16,9 +23,16 @@
 -- Query:
 
     -- Your code here
+    EXPLAIN QUERY PLAN SELECT * FROM cats
+JOIN cat_toys ON (cat_toys.cat_id = cats.id)
+JOIN toys ON (cat_toys.toy_id = toys.id)
+WHERE toys.id = 5;
 
 -- Paste your results below (as a comment):
-
+-- QUERY PLAN
+|--SEARCH TABLE toys USING INTEGER PRIMARY KEY (rowid=?)
+|--SCAN TABLE cat_toys
+--SEARCH TABLE cats USING INTEGER PRIMARY KEY (rowid=?)
 
 -- What do your results mean?
 
@@ -39,7 +53,7 @@
 
 -- Paste your results below (as a comment):
 
-
+-- Run Time: real 0.008
 
 
 ----------
@@ -49,6 +63,7 @@
 -- Create index:
 
     -- Your code here
+    CREATE INDEX idx_cat_toys_toy_id ON cat_toys(toy_id);
 
 -- Analyze Query:
     -- Your code here
