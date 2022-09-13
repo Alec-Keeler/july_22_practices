@@ -10,6 +10,10 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
+      },
+      shade: {
+        type: Sequelize.STRING,
+        allowNull: false
       }
     })
   },
