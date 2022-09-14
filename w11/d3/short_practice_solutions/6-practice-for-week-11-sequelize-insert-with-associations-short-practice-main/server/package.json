@@ -1,5 +1,5 @@
 {
-  "name": "sequelize-lazy-eager-queries-short-practice",
+  "name": "sequelize-insert-with-associations-short-practice",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -13,6 +13,7 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "sequelize": "^6.6.5",
     "sequelize-cli": "^6.2.0",
     "sqlite3": "^5.0.2"

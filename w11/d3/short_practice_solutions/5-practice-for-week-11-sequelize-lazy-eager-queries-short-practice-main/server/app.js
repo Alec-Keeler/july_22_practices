@@ -41,12 +41,14 @@ app.get('/bands-lazy', async (req, res, next) => {
     for(let i = 0; i < allBands.length; i++){
         const band = allBands[i];
         // Your code here
+        const bandMembers = await band.getMusicians({ order: [['firstName']] });
         const bandData = {
             id: band.id,
             name: band.name,
             createdAt: band.createdAt,
             updatedAt: band.updatedAt,
             // Your code here
+            Musicians: bandMembers
         };
         payload.push(bandData);
     }
@@ -57,24 +59,31 @@ app.get('/bands-lazy', async (req, res, next) => {
 app.get('/bands-eager', async (req, res, next) => {
     const payload = await Band.findAll({
         // Your code here
+        // include: { model: Musician },
+        include: [{ model: Musician }],
+        order: [['name'],[Musician, 'firstName']]
     });
     res.json(payload);
 });
 
-app.get('/banddetails/:id', async(req, res, next) => {
-    const band = await Band.findByPk(req.params.id, {
-        // include: Musician
-        // include: [Musician, Instrument]
-        include: [{
-            model: Musician,
-            include: {model: Instrument}
-        }], 
-        // {
-        //     model: Album,
-        //     include: Song
-        // }]
+app.get('/test', async (req, res) => {
+    // const band = await Band.findOne({
+    //     where: {name: 'America The Piano'},
+    //     include: { 
+    //         model: Musician,
+    //         include: {model: Instrument}
+    //     }
+    // })
+
+    // res.json(band)
+
+    const musician = await Musician.findByPk(1, {
+        // include: [Band, Instrument]
+        include: [
+            {model: Band, attributes: ['name']},
+            {model: Instrument, through: {attributes: []}}]
     })
-    res.json(band)
+    res.json(musician)
 })
 
 // Root route - DO NOT MODIFY
