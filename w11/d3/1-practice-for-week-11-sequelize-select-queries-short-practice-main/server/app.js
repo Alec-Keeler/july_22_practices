@@ -22,10 +22,21 @@ app.get('/puppies', async (req, res, next) => {
     let allPuppies;
 
     // Your code here
+    allPuppies = await Puppy.findAll({
+        order: [['name']]
+    })
 
     res.json(allPuppies);
 });
 
+app.get('/puppies/:id(\\d+)', async (req, res, next) => {
+    let puppyById;
+
+    // Your code here
+    puppyById = await Puppy.findByPk(req.params.id)
+
+    res.json(puppyById);
+});
 
 // STEP 2
 // All puppies that have been microchipped
@@ -34,6 +45,12 @@ app.get('/puppies/chipped', async (req, res, next) => {
     let chippedPuppies;
 
     // Your code here
+    chippedPuppies = await Puppy.findAll({
+        where: {
+            microchipped: true
+        },
+        order: [['age_yrs', 'DESC'], ['name']]
+    })
 
     res.json(chippedPuppies);
 });
@@ -46,8 +63,18 @@ app.get('/puppies/name/:name', async (req, res, next) => {
     let puppyByName;
     
     // Your code here
+    puppyByName = await Puppy.findOne({
+        where: {
+            name: req.params.name
+        }
+    })
+    if (!puppyByName) {
+        const err = new Error('There is no puppy with this name')
+        next(err)
+    } else {
+        res.json(puppyByName);
+    }
 
-    res.json(puppyByName);
 })
 
 
@@ -58,6 +85,14 @@ app.get('/puppies/shepherds', async (req, res, next) => {
     let shepherds;
     
     // Your code here
+    shepherds = await Puppy.findAll({
+        where: {
+            breed: {
+                [Op.endsWith]: 'Shepherd'
+            }
+        },
+        order: [['name', 'DESC']]
+    })
 
     res.json(shepherds);
 })
@@ -78,13 +113,14 @@ app.get('/puppies/tinybabies', async (req, res, next) => {
 // STEP 4
 // One puppy matching an id param
 // Finding one record by primary key
-app.get('/puppies/:id', async (req, res, next) => {
-    let puppyById;
+// app.get('/puppies/:id', async (req, res, next) => {
+//     let puppyById;
     
-    // Your code here
+//     // Your code here
+//     puppyById = await Puppy.findByPk(req.params.id)
     
-    res.json(puppyById);
-});
+//     res.json(puppyById);
+// });
 
 
 // Root route - DO NOT MODIFY
