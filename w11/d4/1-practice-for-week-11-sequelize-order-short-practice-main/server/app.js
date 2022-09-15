@@ -18,6 +18,8 @@ app.use(express.json());
 app.get('/bands/latest', async (req, res, next) => {
     const bands = await Band.findAll({ 
         // Your code here
+        attributes: ['name'],
+        order: [['createdAt', 'DESC']]
     });
     res.json(bands);
 })
@@ -27,6 +29,8 @@ app.get('/bands/latest', async (req, res, next) => {
 app.get('/musicians/alphabetic', async (req, res, next) => {
     const musicians = await Musician.findAll({ 
         // Your code here
+        order: [['lastName'], ['firstName']],
+        attributes: ['lastName', 'firstName']
     });
     res.json(musicians);
 })
@@ -36,8 +40,10 @@ app.get('/musicians/alphabetic', async (req, res, next) => {
 // name, then first name, alphabetically
 app.get('/bands/alphabetic-musicians', async (req, res, next) => {
     const bands = await Band.findAll({ 
-        include: { model: Musician }, 
+        attributes: ['name'],
+        include: { model: Musician, attributes: ['firstName', 'lastName'] }, 
         // Your code here
+        order: [['name'], [Musician, 'lastName'], [Musician, 'firstName']]
     })
     res.json(bands);
 })
