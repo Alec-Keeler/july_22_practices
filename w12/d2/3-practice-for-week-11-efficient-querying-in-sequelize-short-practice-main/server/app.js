@@ -38,19 +38,22 @@ app.get('/books', async (req, res) => {
 
     let books = await Book.findAll({
         include: Author,
+        where: {
+            price: req.query.maxPrice
+        }
     });
 
     // Filter by price if there is a maxPrice defined in the query params
-    if (req.query.maxPrice) {
-        books = books.filter(book => book.price < parseInt(req.query.maxPrice));
-    };
+    // if (req.query.maxPrice) {
+    //     books = books.filter(book => book.price < parseInt(req.query.maxPrice));
+    // };
     res.json(books);
 });
 
     // 1a. Analyze:
 
         // Record Executed Query and Baseline Benchmark Below:
-
+// Elapsed time: 864ms
         // - What is happening in the code of the query itself?
 
 
@@ -94,10 +97,16 @@ app.patch('/authors/:authorId/books', async (req, res) => {
         });
     }
 
-    for (let book of author.Books) {
-        book.price = req.body.price;
-        await book.save();
-    }
+    // for (let book of author.Books) {
+    //     book.price = req.body.price;
+    //     await book.save();
+    // }
+
+    await Book.update({
+        price: req.query.price
+    },
+    {where: {authorId: req.params.authorId}})
+
 
     const books = await Book.findAll({
         where: {
